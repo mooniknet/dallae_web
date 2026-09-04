@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title data-i18n-title="dallaePage.title">달래 — 시간을 심으면 정원이 자랍니다 | MoonIK</title>
+<meta name="description" content="달래는 목표를 씨앗으로 심고, 투자한 시간만큼 나만의 정원에 꽃이 피어나는 MoonIK의 성장 앱입니다." data-i18n-content="dallaePage.desc" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css?v=22" />
+<link rel="icon" type="image/png" href="assets/favicon.png?v=2" />
+<script src="i18n.js?v=7" defer></script>
+<style>
+  .icon-hero {
+    width: 96px; height: 96px; border-radius: 24px;
+    margin: 0 auto 24px; border: 1px solid var(--border);
+  }
+  .dallae-hero {
+    position: relative;
+    background:
+      linear-gradient(180deg, rgba(9,12,23,0.6) 0%, rgba(9,12,23,0.42) 42%, rgba(9,12,23,0.78) 80%, var(--bg) 100%),
+      url("assets/dallae-hero-bg.jpg");
+    background-size: cover;
+    background-position: center 62%;
+    padding: 110px 24px 90px;
+  }
+  .dallae-hero .page-title {
+    font-size: clamp(46px, 8vw, 80px);
+    font-weight: 400; letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  .dallae-hero h1 {
+    font-size: clamp(20px, 2.6vw, 29px);
+    font-weight: 400; color: var(--text-dim);
+    margin-bottom: 24px;
+  }
+  .dallae-hero > .wrap > p {
+    font-size: 17px;
+  }
+  .dallae-cta {
+    background:
+      linear-gradient(180deg, rgba(9,12,23,0.6) 0%, rgba(9,12,23,0.72) 100%),
+      url("assets/dallae-cta-bg.jpg");
+    background-size: cover;
+    background-position: center 60%;
+    border-color: rgba(145, 190, 124, 0.24);
+  }
+  .detail-visual {
+    min-height: 0; height: 100%; border-radius: 28px;
+    background:
+      radial-gradient(circle at 50% 22%, rgba(125, 190, 103, 0.18), transparent 42%),
+      linear-gradient(160deg, #13231d, #0b1117 72%);
+    border: 1px solid rgba(145, 190, 124, 0.24);
+    display: flex; align-items: center; justify-content: center;
+    padding: 18px; overflow: hidden; position: relative;
+    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.28);
+  }
+  .detail-screenshot {
+    width: min(100%, 310px); height: auto; max-height: 610px;
+    object-fit: contain; border-radius: 25px; position: relative; z-index: 1;
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.52), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+  .screen-caption {
+    position: absolute; left: 24px; bottom: 22px; z-index: 2;
+    padding: 7px 12px; border-radius: 999px;
+    background: rgba(6, 15, 12, 0.82); border: 1px solid rgba(157, 207, 130, 0.28);
+    color: #d9f2cf; font-size: 13px; letter-spacing: 0.03em;
+    backdrop-filter: blur(8px);
+  }
+  .detail-body .eyebrow {
+    color: var(--accent); font-weight: 400; font-size: 14px;
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; display: block;
+  }
+  .detail-body h3 { font-size: 24px; font-weight: 400; margin-bottom: 12px; letter-spacing: -0.02em; }
+  .detail-body p { color: var(--text-dim); font-size: 17px; }
+
+  .db-book { position: relative; display: flex; align-items: center; gap: 16px; }
+  .db-stage { position: relative; flex: 1 1 auto; height: 600px; perspective: 2400px; }
+  .db-page {
+    position: absolute; inset: 0;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transform-origin: left center;
+    transition: transform 1.35s cubic-bezier(0.45, 0, 0.2, 1);
+    will-change: transform;
+  }
+  .db-page-inner {
+    position: relative; height: 100%;
+    display: grid; grid-template-columns: 0.9fr 1fr; gap: 40px; align-items: center;
+    background: var(--bg-soft); border: 1px solid var(--border); border-radius: 24px;
+    padding: 32px;
+    backface-visibility: hidden;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+  }
+  .db-page::after {
+    content: ""; position: absolute; inset: 0; border-radius: 24px;
+    background: linear-gradient(90deg, rgba(0,0,0,0.28), transparent 14%);
+    pointer-events: none;
+  }
+  .db-nav { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .db-arrow {
+    width: 46px; height: 46px; border-radius: 50%;
+    border: 1px solid var(--border); background: var(--bg-soft); color: var(--text);
+    font-size: 20px; font-family: inherit; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .db-arrow:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+  .db-arrow:disabled { opacity: 0.3; cursor: default; }
+  .db-nav-label { font-size: 12px; color: var(--text-dim); transition: opacity 0.2s; }
+  .db-arrow:disabled ~ .db-nav-label { opacity: 0.3; }
+  .db-controls { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 28px; }
+  .db-dots { display: flex; align-items: center; gap: 8px; }
+  .db-dot {
+    width: 8px; height: 8px; border-radius: 999px; background: var(--border);
+    border: none; padding: 0; cursor: pointer;
+    transition: width 0.3s, background 0.3s;
+  }
+  .db-dot.active { background: var(--accent); width: 22px; }
+  .db-counter { font-size: 14px; color: var(--text-dim); font-variant-numeric: tabular-nums; }
+
+  @media (max-width: 780px) {
+    .db-stage { height: 800px; }
+    .db-page-inner { grid-template-columns: 1fr; grid-template-rows: auto 1fr; gap: 20px; padding: 20px; }
+    .db-page .detail-visual { height: 460px; }
+    .db-nav { display: none; }
+    .detail-screenshot { width: min(100%, 282px); max-height: 558px; border-radius: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="https://moonik.net" class="logo"><img src="assets/moonik-logo-nav.png" alt="MoonIK" /></a>
+      <div class="nav-links">
+        <a href="https://moonik.net/about.html" data-i18n="nav.about">회사 소개</a>
+        <a href="index.html" data-i18n="nav.dallae" class="nav-active">달래</a>
+        <a href="https://moonik.net/beyondmoment.html" data-i18n="beyond.name">BeyondMoment</a>
+      </div>
+      <div class="nav-actions">
+        <button id="lang-toggle" class="btn btn-ghost" onclick="moonikLang.toggle()">EN</button>
+        <a href="https://moonik.net" class="btn btn-ghost nav-back" data-i18n="nav.back">← 메인으로</a>
+        <button class="nav-toggle" onclick="moonikNav.toggle()" aria-label="Menu">☰</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero dallae-hero">
+    <div class="wrap">
+      <img src="assets/dallae-icon.png" alt="달래 아이콘" class="icon-hero dallae-icon-float" />
+      <h2 class="page-title" data-i18n="dallae.nameFull">달래 <span style="opacity:0.5; font-weight:600; font-size:16px; letter-spacing:0.06em; margin-left:8px;">(Dallae)</span></h2>
+      <h1 data-i18n="garden.headline">시간을 심으면<br /><span class="accent">정원이 자랍니다</span></h1>
+      <p data-i18n="dallaePage.hero.desc">달래는 이루고 싶은 목표를 씨앗으로 심고, 거기에 쏟은 시간만큼 나만의 정원에 꽃을 피우는 성장 앱입니다. 혼자여도 외롭지 않게, 친구의 정원에 놀러가 서로의 성장을 응원할 수 있어요.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn btn-primary btn-lg" data-i18n="dallae.playBtn">Google Play (준비 중)</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2 data-i18n="how.title">달래는 이렇게 작동해요</h2>
+        <p data-i18n="how.desc">목표를 심고, 시간을 쏟고, 정원이 자라는 걸 지켜보세요.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3 data-i18n="step1.title">목표 씨앗 심기</h3>
+          <p data-i18n="step1.desc">이루고 싶은 목표를 씨앗으로 등록하고, 필요하면 하위 목표로 세분화해요.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3 data-i18n="step2.title">시간 투자하기</h3>
+          <p data-i18n="step2.desc">시작과 정지를 눌러 목표에 집중한 시간을 자연스럽게 기록해요.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3 data-i18n="step3.title">정원에 꽃 피우기</h3>
+          <p data-i18n="step3.desc">쌓인 시간만큼 나만의 정원에 한국 자생화가 한 송이씩 피어나요.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h3 data-i18n="step4.title">친구와 나누기</h3>
+          <p data-i18n="step4.desc">친구를 추가하고 서로의 정원에 놀러가 성장 과정을 응원해요.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Deep dive</span>
+        <h2 data-i18n="deep.title">달래를 자세히 살펴보면</h2>
+      </div>
+
+      <div class="db-book" id="dbBook">
+        <div class="db-nav">
+          <button class="db-arrow db-prev" id="dbPrev" aria-label="Previous page" disabled>‹</button>
+          <span class="db-nav-label" data-i18n="deep.prev">이전</span>
+        </div>
+        <div class="db-stage">
+          <div class="db-page" data-index="0">
+            <div class="db-page-inner">
+              <figure class="detail-visual">
+                <img class="detail-screenshot" src="assets/screenshots/garden-main.jpg" data-img-ko="assets/screenshots/garden-main.jpg" data-img-en="assets/screenshots/garden-main-en.jpg" data-alt-ko="달래 앱의 목표 식물과 계곡 정원 화면" data-alt-en="Dallae goal plants in a bright valley garden" width="1080" height="2400" loading="lazy" decoding="async" alt="달래 앱의 목표 식물과 계곡 정원 화면" />
+                <figcaption class="screen-caption" data-i18n="detail1.visual">목표 식물과 정원 화면</figcaption>
+              </figure>
+              <div class="detail-body">
+                <span class="eyebrow" data-i18n="detail1.eyebrow">목표를 씨앗으로</span>
+                <h3 data-i18n="detail1.title">심으면, 자리는 정원이 알아서</h3>
+                <p data-i18n="detail1.desc">이루고 싶은 목표를 씨앗으로 심으면 정원 안에 자연스럽게 자리를 잡아요. 한 번에 최대 8개의 목표를 키울 수 있고, 길게 눌러 원하는 자리로 옮기며 나만의 정원을 꾸밀 수 있습니다.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="db-page" data-index="1">
+            <div class="db-page-inner">
+              <figure class="detail-visual">
+                <img class="detail-screenshot" src="assets/screenshots/flower-book.jpg?v=2" data-img-ko="assets/screenshots/flower-book.jpg?v=2" data-img-en="assets/screenshots/flower-book-en.jpg" data-alt-ko="달래 앱의 한국 자생 꽃 도감 첫 화면" data-alt-en="Dallae Korean wildflower book in English" width="1080" height="2400" loading="lazy" decoding="async" alt="달래 앱의 한국 자생 꽃 도감 첫 화면" />
+                <figcaption class="screen-caption" data-i18n="detail2.visual">한국 자생 꽃 도감 화면</figcaption>
+              </figure>
+              <div class="detail-body">
+                <span class="eyebrow" data-i18n="detail2.eyebrow">정원과 자생화 도감</span>
+                <h3 data-i18n="detail2.title">노력이 눈에 보이는 방식</h3>
+                <p data-i18n="detail2.desc">목표에 투자한 시간이 쌓일수록 나만의 정원에 꽃이 한 송이씩 피어납니다. 진달래, 패랭이꽃처럼 실제 한국에서 자라는 꽃들을 하나씩 만나는 재미가 있어요. 숫자로 된 기록이 아니라, 직접 가꾼 정원으로 노력을 확인할 수 있습니다.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="db-page" data-index="2">
+            <div class="db-page-inner">
+              <figure class="detail-visual">
+                <img class="detail-screenshot" src="assets/screenshots/timer-detail.jpg" data-img-ko="assets/screenshots/timer-detail.jpg" data-img-en="assets/screenshots/timer-detail-en.jpg" data-alt-ko="달래 앱의 목표별 성장 타이머와 활동 기록 화면" data-alt-en="Dallae growth timer and session history in English" width="1080" height="2400" loading="lazy" decoding="async" alt="달래 앱의 목표별 성장 타이머와 활동 기록 화면" />
+                <figcaption class="screen-caption" data-i18n="detail3.visual">성장 타이머와 활동 기록 화면</figcaption>
+              </figure>
+              <div class="detail-body">
+                <span class="eyebrow" data-i18n="detail3.eyebrow">타임 트래킹</span>
+                <h3 data-i18n="detail3.title">시작·정지 한 번으로 기록되는 시간</h3>
+                <p data-i18n="detail3.desc">목표마다 시작과 정지를 누르기만 하면 성장 시간이 자동으로 쌓여요. 날짜별 기록은 성장 일지에 정리되고, 타이머가 실행되는 동안에는 알림과 위젯에서도 진행 상황을 확인할 수 있습니다.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="db-page" data-index="3">
+            <div class="db-page-inner">
+              <figure class="detail-visual">
+                <img class="detail-screenshot" src="assets/screenshots/growth-journal.jpg" data-img-ko="assets/screenshots/growth-journal.jpg" data-img-en="assets/screenshots/growth-journal-en.jpg" data-alt-ko="달래 앱에서 나와 친구의 성장을 함께 보는 성장 기록 화면" data-alt-en="Dallae shared growth journal in English" width="1080" height="2400" loading="lazy" decoding="async" alt="달래 앱에서 나와 친구의 성장을 함께 보는 성장 기록 화면" />
+                <figcaption class="screen-caption" data-i18n="detail4.visual">친구와 함께 보는 성장 기록</figcaption>
+              </figure>
+              <div class="detail-body">
+                <span class="eyebrow" data-i18n="detail4.eyebrow">친구와 함께</span>
+                <h3 data-i18n="detail4.title">혼자 하지만, 혼자는 아니게</h3>
+                <p data-i18n="detail4.desc">친구를 추가하면 서로의 정원을 구경할 수 있어요. 각자의 속도로 목표를 향해 가지만, 친구가 얼마나 가꿔왔는지 보면서 서로에게 작은 자극과 응원이 됩니다. 모든 기록은 클라우드에 안전하게 백업돼요.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="db-nav">
+          <button class="db-arrow db-next" id="dbNext" aria-label="Next page">›</button>
+          <span class="db-nav-label" data-i18n="deep.next">다음</span>
+        </div>
+      </div>
+
+      <div class="db-controls">
+        <div class="db-dots" id="dbDots">
+          <button class="db-dot active" data-index="0" aria-label="Page 1"></button>
+          <button class="db-dot" data-index="1" aria-label="Page 2"></button>
+          <button class="db-dot" data-index="2" aria-label="Page 3"></button>
+          <button class="db-dot" data-index="3" aria-label="Page 4"></button>
+        </div>
+        <span class="db-counter"><span id="dbCurrent">1</span> / 4</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta-section">
+    <div class="wrap">
+      <div class="cta dallae-cta">
+        <h2 data-i18n="cta2.title">달래의 첫 번째 정원사가 되어주세요</h2>
+        <p data-i18n="cta2.desc">지금은 개발 중이에요. 출시 소식을 가장 먼저 받아보고 싶다면 알려주세요.</p>
+        <div class="hero-actions">
+          <a href="mailto:moonik.net@gmail.com" class="btn btn-primary btn-lg" data-i18n="cta.btn2">출시 소식 받기</a>
+          <a href="https://moonik.net" class="btn btn-ghost btn-lg" data-i18n="cta2.btn2">MoonIK 홈으로</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; width:100%;">
+    <span>© 2026 MoonIK. All rights reserved.</span>
+    <div class="foot-links">
+      <a href="index.html" data-i18n="footer.home">홈</a>
+      <a href="#" data-i18n="footer.terms">이용약관</a>
+      <a href="mailto:moonik.net@gmail.com" data-i18n="footer.contact">문의하기</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var book = document.getElementById('dbBook');
+    if (!book) return;
+    var pages = Array.prototype.slice.call(book.querySelectorAll('.db-page'));
+    var prevBtn = document.getElementById('dbPrev');
+    var nextBtn = document.getElementById('dbNext');
+    var dots = Array.prototype.slice.call(document.querySelectorAll('.db-dot'));
+    var counterEl = document.getElementById('dbCurrent');
+    var total = pages.length;
+    var current = 0;
+    var animating = false;
+
+    function render() {
+      pages.forEach(function (page, i) {
+        if (i < current) {
+          page.style.transform = 'rotateY(-170deg)';
+          page.style.zIndex = i;
+        } else {
+          page.style.transform = 'rotateY(0deg)';
+          page.style.zIndex = total - i;
+        }
+      });
+      dots.forEach(function (dot, i) {
+        dot.classList.toggle('active', i === current);
+      });
+      if (counterEl) counterEl.textContent = current + 1;
+      if (prevBtn) prevBtn.disabled = current === 0;
+      if (nextBtn) nextBtn.disabled = current === total - 1;
+    }
+
+    function goTo(index) {
+      if (animating || index === current || index < 0 || index > total - 1) return;
+      var flippingIndex = index > current ? current : index; // whichever page is actually rotating
+      current = index;
+      animating = true;
+      render();
+      // keep the rotating page on top for the whole transition so it's visibly
+      // turning either direction, instead of the destination page instantly
+      // covering it via z-index the moment render() runs.
+      pages[flippingIndex].style.zIndex = total + 1;
+      setTimeout(function () {
+        animating = false;
+        render();
+      }, 1450);
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); });
+    dots.forEach(function (dot, i) {
+      dot.addEventListener('click', function () { goTo(i); });
+    });
+
+    book.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') goTo(current + 1);
+      if (e.key === 'ArrowLeft') goTo(current - 1);
+    });
+
+    var touchStartX = null;
+    var stage = book.querySelector('.db-stage');
+    stage.addEventListener('touchstart', function (e) {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    stage.addEventListener('touchend', function (e) {
+      if (touchStartX === null) return;
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) {
+        if (dx < 0) goTo(current + 1);
+        else goTo(current - 1);
+      }
+      touchStartX = null;
+    }, { passive: true });
+
+    render();
+  })();
+</script>
+
+</body>
+</html>
